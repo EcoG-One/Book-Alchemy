@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <form action="/add_book" method="POST">
+        <label for="title">Book Title:</label>
+        <input type="text" id="title" name="title" placeholder="Book Title"
+               required>
+
+        <label for="author">Choose Author:</label>
+        <select name="author" id="author" required>
+            {% for author in authors %}
+            <option value="{{ author.id }}">{{ author.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="publication_year">Publication Year:</label>
+        <input type="number" max="{{ current_year }}" step="1"
+               name="publication_year"
+               id="publication_year" placeholder="{{ current_year }}" required>
+
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" placeholder="1234567890123"
+               required>
+
+        <label for="rating">Rating:</label>
+        <input type="number" min="0" max="10" step="1" name="rating" id="rating"
+               value="3" required>
+
+        <label for="summary">Summary:</label>
+        <input type="textarea" id="summary" name="summary"
+               placeholder="Please submit here book's summary.">
+
+        <input type="hidden" id="img_url" name="img_url"
+               value="static/images/book.jpg">
+        <input type="submit" value="Add Book">
+    </form>
+    {% if item %}
+    <h2>Book "{% print(item.title) %}" added successfully!</h2>
+    {% endif %}
+    {% if message == "Book already exists!" %}
+        <h2>Book already exists!</h2>
+    {% endif %}
+    <br>
+    <a href="/">
+        <button class="back_button">Home</button></a>
+</body>
+</html>
