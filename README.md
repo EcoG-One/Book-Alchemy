@@ -20,7 +20,6 @@ It prevents duplicate authors or book ISBN and retrieves the books covers from a
 
 ```bash
 git clone https://github.com/EcoG-One/Book-Alchemy.git
-cd book_alchemy
 ```
 
 2. Install dependencies:
